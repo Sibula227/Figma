@@ -408,8 +408,16 @@ a {
   background-color: #2e2100;
 }
 
+.feedback-list {
+  overflow: hidden;
+  display: flex;
+  transform: translateX(-100%);
+  transition: all ease;
+}
+
 .feedback-item {
   display: flex;
+  flex-shrink: 0;
 }
 
 .feedback-item .avatar {
