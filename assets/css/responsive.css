@@ -1,0 +1,145 @@
+/* ========== Viewport (HTML head) ==========
+<meta name="viewport" content="width=device-width, initial-scale=1">
+=========================================== */
+
+/* ====== CSS Variables (tuỳ chỉnh dễ) ====== */
+:root {
+  --max-width: 1200px;
+  --gap: 1.6rem;
+  --container-pad: 1.6rem;
+  --base-font: 1.6rem; /* 16px */
+  --heading-scale: 1.25;
+}
+
+/* ====== Mobile-first base ====== */
+* {
+  box-sizing: border-box;
+}
+html {
+  font-size: 62.5%;
+} /* 1rem = 10px => dễ tính */
+body {
+  font-size: var(--base-font); /* sử dụng rem cho text */
+  margin: 0;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Fluid container */
+.container {
+  width: 100%;
+  padding-left: var(--container-pad);
+  padding-right: var(--container-pad);
+  margin-left: auto;
+  margin-right: auto;
+  max-width: calc(var(--max-width));
+}
+
+/* Utility: responsive images */
+img,
+video,
+iframe {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Layout helpers */
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--gap);
+}
+.col {
+  flex: 1 1 100%;
+} /* mobile: full-width by default */
+
+/* Typography responsive with clamp */
+h1 {
+  font-size: clamp(2.4rem, 4vw, 3.6rem);
+  margin: 0 0 1rem;
+}
+h2 {
+  font-size: clamp(2rem, 3.2vw, 2.8rem);
+  margin: 0 0 0.8rem;
+}
+p {
+  margin: 0 0 1rem;
+}
+
+/* Buttons / touch targets */
+.button {
+  display: inline-block;
+  padding: 0.9rem 1.2rem;
+  font-size: 1.6rem;
+  border-radius: 0.6rem;
+  text-align: center;
+  min-height: 44px; /* touch target */
+  line-height: 1;
+}
+
+/* Simple responsive nav (mobile-first hamburger) */
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.8rem 0;
+}
+.nav-links {
+  display: none;
+} /* hidden on mobile */
+.nav-toggle {
+  display: block;
+  font-size: 2.2rem;
+  cursor: pointer;
+}
+
+/* ======= Media queries (tablet -> desktop) ======= */
+/* >= 576px (large phones) */
+@media (min-width: 576px) {
+  .col-sm-6 {
+    flex: 1 1 calc(50% - var(--gap));
+  }
+  .nav-links {
+    display: flex;
+    gap: 1.2rem;
+    align-items: center;
+  }
+  .nav-toggle {
+    display: none;
+  }
+}
+
+/* >= 768px (tablets) */
+@media (min-width: 768px) {
+  .container {
+    padding-left: 2.4rem;
+    padding-right: 2.4rem;
+  }
+  .col-md-4 {
+    flex: 1 1 calc(33.333% - var(--gap));
+  }
+}
+
+/* >= 992px (laptop) */
+@media (min-width: 992px) {
+  .col-lg-3 {
+    flex: 1 1 calc(25% - var(--gap));
+  }
+}
+
+/* Example hide-on-mobile helper */
+.hide-mobile {
+  display: none;
+}
+@media (min-width: 576px) {
+  .hide-mobile {
+    display: block;
+  }
+}
+
+/* Small performance tweak: avoid large repaints on mobile */
+img {
+  will-change: transform;
+}
